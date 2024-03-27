@@ -1,0 +1,68 @@
+<html>
+<head></head>
+<body>
+<p>This is the <a href="https://copernicium291.github.io/HFRICTIONS/">HFRICTIONS</a> reference page.</p>
+<br><br>
+<h1>Basic Syntax</h1>
+<p>Each line of HFRICTIONS code must be separated by either a line break or a semicolon. Semicolons are functionally equivalent to line breaks.<br>A line of code is either a global function or a character function.<br>A global function is of the form "a(b)" where:<br> - a is the function name<br> - b is the function's parameters (if it has any)<br>A character function is of the form "c.a(b)", where c is the character's "name" as defined in its creation function.<br>A function may have one or more "synonyms", such as wait() and delay(), which behave identically.
+<br>
+<h1>Global Functions</h1>
+<h2>angleMode(mode)</h2>
+<p>mode=RADIAN, RADIANS, RAD: all angles are treated as being in radians<br>mode=DEGREE, DEGREES, DEG: all angles are treated as being in degrees<br>mode=TURN, TURNS, CYCLE, CYCLES, REVOLUTION, REVOLUTIONS, REV: all angles are treated as being in turns<br>mode=GRADIAN, GRADIANS, GRAD: all angles are measure in gradians<br>Default: DEGREES<br>Synonyms: angle</p>
+<h2>newCharacter(name)</h2>
+<p>Creates a new character with a name. If this name is already used, the function will fail.<br>This function creates a default character. To set appearance and character variables, use their functions in the character's namespace immediately after creating it.<br>Do not confuse a character's internal name with the name of a character in a story. The internal name is only used in the source code and will not be exported.<br>name (string): name of character<br>Synonyms: new, char, newChar, newchar, create</p>
+<h2>wait(time)</h2>
+<p>time (number): amount of seconds to wait<br>Synonyms: delay</p>
+<br>
+<h1>Character Functions</h1>
+<h2>flip(axis)</h2>
+<p>Reflects a character on an axis. Also see unflip()<br>axis (x or y): axis to flip on</p>
+<h2>goto(x,y)</h2>
+<p>x (number): x-position to move to<br>y (number): y-position to move to<br>Synonyms: go</p>
+<h2>hide()</h2>
+<p>Makes a character invisible.</p>
+<h2>image(imageName)</h2>
+<p>Sets a character's appearance to a certain image. (Custom images are not yet supported.)<br>imageName (string): image to set to (see list of images)<br>Synonyms: appearance, costume</p>
+<h2>label(x,y,text,size)</h2>
+<p>label(x,y,text,size)
+The coordinates, text, and/or size can be omitted and rearranged in most ways without causing problems.<br>x (number): new x position of label, relative to the center of the character<br>y (number): new y position of label, relative to the center of the character<br>text (string): text to set label to<br>size (number): font size<br>Synonyms: text</p>
+<h2>layer(z)</h2>
+<p>Characters with higher layers are rendered in front of characters with lower layers.<br>z (number): new layer<br>Synonyms: z</p>
+<h2>rotate(angle)</h2>
+<p>Rotates a character by an angle instantly. To rotate smoothly over time, use smoothRotate(). To set the rotation to a specific value, use rotation().<br>angle (number): angle to set to (depends on global angleMode, default degrees)<br>Synonyms: turn</p>
+<h2>rotation(angle)</h2>
+<p>Sets rotation to a specific value. For relative rotation, use rotate()<br>angle (number): angle to set to (depends on global angleMode, default degrees)<br>Synonyms: direction, rot, dir, point</p>
+<h2>rotation(x,y)</h2>
+<p>x (number): x component of the position to point towards<br>y (number): y component of the position to point towards<br>Synonyms: direction, rot, dir, point</p>
+<h2>scale(x,y)</h2>
+<p>Providing only one input will set both scaling directions to the same value.<br>x (number): new x scaling factor<br>y (number): new y scaling factor<br>Synonyms: size</p>
+<h2>show()</h2>
+<p>Makes a character visible.</p>
+<h2>smoothMove(x1,y1,x2,y2,time,[p])</h2>
+<p>ex: smoothMove(-200,-100,100,100,2,0,1)<br>x1 (number): starting x-position<br>y1 (number): starting y-position<br>x2 (number): ending x-position<br>y2 (number): ending y-position<br>time (number): total duration of motion<br>p (numbers): polynomial used for interpolation (reverse order, without constant term), defaults to 1. ex: move(-40,-30,80,100,1,0,3,-2) will use the smoothstep function for a smoother move<br>Synonyms: move, glide</p>
+<h2>smoothRotate(angle1,angle2,time,[p])</h2>
+<p>angle1 (number): starting angle<br>angle2 (number): ending angle<br>time (number): total duration of rotation<br>p (numbers): polynomial used for interpolation (reverse order, without constant term), defaults to 1. ex: smoothRotate(0,360,1,0,3,-2) will use the smoothstep function for a smoother rotation<br>Synonyms: spin</p>
+<h2>smoothScale(xs1,ys1,xs2,ys2,time,[p])</h2>
+<p>xs1 (number): starting x scale>br>ys1 (number): starting y scale<br>xs2 (number): ending x scale<br>ys2 (number): ending y scale<br>time (number): total duration of scaling<br>p (number): polynomial used for interpolation (reverse order, without constant term), defaults to 1. ex: smoothScale(1,1,0.5,2,1,0,3,-2) will use the smoothstep function for a smoother squish<br>Synonyms: stretch, squish</p>
+<h2>speechBubble(text)</h2>
+<p>String must be in quotes!<br>To remove speech bubble, use this function with no parameters.<br>text (string): text to put in the speech bubble<br>Synonyms: bub, bubble</p>
+<h2>toggleVisibility()</h2>
+<p>Switches whether the character is visible. Also see show() and hide().<br>Synonyms: vis, visibility, togglevis</p>
+<h2>unflip()</h2>
+<p>Resets a character to appear unflipped.</p>
+<h2>x(x)</h2>
+<p>x (number): new x position</p>
+<h2>y(y)</h2>
+<p>y (number): new y position</p>
+<br>
+<h1>List of Images</h1>
+<p>aple<br>koala tree<br>whale</p>
+</body>
+</html>
+
+
+
+
+
+
+

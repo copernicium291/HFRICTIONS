@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
+  <script language="javascript" type="text/javascript" src="libraries/p5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="HFRICTIONS5.js"></script>
+  <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+
+  <!-- This line removes any default padding and style.
+       You might only need one of these values set. -->
+  <style> body { padding: 0; margin: 0; background-color: black; color: white;} </style>
+  <style> textarea { max-width: 98%;} </style>
+</head>
+
+<body>
+  <div id="image-input"><label for="import-file">Import png: </label><input type="file" accept=".png" onchange="importImage()" id="import-file"></div>
+  <button type="button" id="play-button" onclick="startPlay()">Play</button>
+  <button type="button" id="cease-button" onclick="stopPlay()">Stop</button>
+  <button type="button" id="export-image" onclick="encodeImage()">Export</button>
+  <div id="canvas-holder">
+  </div>
+  <button type="button" id="compile-code" onclick="compileCode()">Compile</button>
+  <textarea id="code-input" rows="10" cols="300"></textarea>
+</body>
+</html>

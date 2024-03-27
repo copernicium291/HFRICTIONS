@@ -341,7 +341,7 @@ function interpretCode() {
     let ï = [];
     let N = I[i].split("(")[0];
     if (N.split(".").length == 2) {nam = N.split(".")[0];N = N.split(".")[1];} else {if (rnm) {nam = "";}}
-    let o = I[i].substring(o.indexOf("(")+1,o.length-1);
+    let o = I[i].substring(I[i].indexOf("(")+1,I[i].length-1);
     //o=o.substring(0,o.length-1);
     if (nam === "") {
       ï.push(-1);

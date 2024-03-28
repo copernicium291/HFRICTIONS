@@ -11,6 +11,8 @@
 <p>mode=RADIAN, RADIANS, RAD: all angles are treated as being in radians<br>mode=DEGREE, DEGREES, DEG: all angles are treated as being in degrees<br>mode=TURN, TURNS, CYCLE, CYCLES, REVOLUTION, REVOLUTIONS, REV: all angles are treated as being in turns<br>mode=GRADIAN, GRADIANS, GRAD: all angles are measure in gradians<br>Default: DEGREES<br>Synonyms: angle</p>
 <h2>newCharacter(name)</h2>
 <p>Creates a new character with a name. If this name is already used, the function will fail.<br>This function creates a default character. To set appearance and character variables, use their functions in the character's namespace immediately after creating it.<br>Do not confuse a character's internal name with the name of a character in a story. The internal name is only used in the source code and will not be exported.<br>name (string): name of character<br>Synonyms: new, char, newChar, newchar, create</p>
+<h2>polyMode(mode)</h2>
+<p>mode=DIRECT: the polynomial's output is used directly<br>mode=NORM: the polynomial's output always starts at 0 and ends at 1<br>mode=CLAMP: the polynomial's output must be in the range from 0 to 1<br>mode=BOUNDS: both NORM and CLAMP apply<br>Default: DIRECT</p>
 <h2>wait(time)</h2>
 <p>time (number): amount of seconds to wait<br>Synonyms: delay</p>
 <br>
@@ -56,13 +58,6 @@ The coordinates, text, and/or size can be omitted and rearranged in most ways wi
 <p>y (number): new y position</p>
 <br>
 <h1>List of Images</h1>
-<p>aple<br>koala tree<br>whale</p>
+<p>aple<br>bear<br>hippopotamus<br>koala tree<br>josh<br>purple koala tree<br>whale</p>
 </body>
 </html>
-
-
-
-
-
-
-

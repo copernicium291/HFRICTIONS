@@ -1,6 +1,5 @@
 class Hfchar {
-  constructor(name) {
-    this.name = name;
+  constructor() {
     this.xp = 0;         // x position
     this.yp = 0;         // y position
     this.zp = 0;         // z (layer) position
@@ -27,34 +26,34 @@ class Hfchar {
   updateMoves() {
     if (this.move !== false) {
       if (timer >= this.move[0]+this.move[1]) {
-        this.xp = this.move[4]*evalPoly(1,this.move.slice(6,this.move.length));
-        this.yp = this.move[5]*evalPoly(1,this.move.slice(6,this.move.length));
+        this.xp = this.move[4]*evalPoly(1,this.move.slice(6,this.move.length),pMode);
+        this.yp = this.move[5]*evalPoly(1,this.move.slice(6,this.move.length),pMode);
         this.move = false;
       }
     }
     if (this.stretch !== false) {
       if (timer >= this.stretch[0]+this.stretch[1]) {
-        this.xsc = this.stretch[4]*evalPoly(1,this.stretch.slice(6,this.stretch.length));
-        this.ysc = this.stretch[5]*evalPoly(1,this.stretch.slice(6,this.stretch.length));
+        this.xsc = this.stretch[4]*evalPoly(1,this.stretch.slice(6,this.stretch.length),pMode);
+        this.ysc = this.stretch[5]*evalPoly(1,this.stretch.slice(6,this.stretch.length),pMode);
         this.stretch = false;
       }
     }
     if (this.spin !== false) {
       if (timer >= this.spin[0]+this.spin[1]) {
-        this.rot = aMode*this.spin[3]*evalPoly(1,this.spin.slice(4,this.spin.length));
+        this.rot = aMode*this.spin[3]*evalPoly(1,this.spin.slice(4,this.spin.length),pMode);
         this.spin = false;
       }
     }
     if (this.move !== false) {
-      this.xp = this.move[2]+(this.move[4]-this.move[2])*evalPoly((timer-this.move[0])/this.move[1],this.move.slice(6,this.move.length));
-      this.yp = this.move[3]+(this.move[5]-this.move[3])*evalPoly((timer-this.move[0])/this.move[1],this.move.slice(6,this.move.length));
+      this.xp = this.move[2]+(this.move[4]-this.move[2])*evalPoly((timer-this.move[0])/this.move[1],this.move.slice(6,this.move.length),pMode);
+      this.yp = this.move[3]+(this.move[5]-this.move[3])*evalPoly((timer-this.move[0])/this.move[1],this.move.slice(6,this.move.length),pMode);
     }
     if (this.stretch !== false) {
-      this.xsc = this.stretch[2]+(this.stretch[4]-this.stretch[2])*evalPoly((timer-this.stretch[0])/this.stretch[1],this.stretch.slice(6,this.stretch.length));
-      this.ysc = this.stretch[3]+(this.stretch[5]-this.stretch[3])*evalPoly((timer-this.stretch[0])/this.stretch[1],this.stretch.slice(6,this.stretch.length));
+      this.xsc = this.stretch[2]+(this.stretch[4]-this.stretch[2])*evalPoly((timer-this.stretch[0])/this.stretch[1],this.stretch.slice(6,this.stretch.length),pMode);
+      this.ysc = this.stretch[3]+(this.stretch[5]-this.stretch[3])*evalPoly((timer-this.stretch[0])/this.stretch[1],this.stretch.slice(6,this.stretch.length),pMode);
     }
     if (this.spin !== false) {
-      this.rot = aMode*(this.spin[2]+(this.spin[3]-this.spin[2])*evalPoly((timer-this.spin[0])/this.spin[1],this.spin.slice(4,this.spin.length)));
+      this.rot = aMode*(this.spin[2]+(this.spin[3]-this.spin[2])*evalPoly((timer-this.spin[0])/this.spin[1],this.spin.slice(4,this.spin.length),pMode));
     }
   }
 }
@@ -69,19 +68,19 @@ const B_DESCENT = 12;
 const B_MAX_WIDTH = 200;
 const B_MIN_WIDTH = 36;
 
-let ver = 0; // HFRICTIONS version
-let im; // only used for immage upload
-let imgnames = ["whale.svg","koala_tree.svg","aple.svg"];
-let imgshort = ["whale"    ,"koala tree"    ,"aple"    ];
-let imgload  = [false      ,false           ,false     ];
-let imgs     = [false      ,false           ,false     ];
-let dWidths  = [128        ,192             ,64        ];
+let ver = 1; // HFRICTIONS version
+let im; // only used for image upload
+let imgnames = ["whale.svg","koala_tree.svg","aple.svg","hippo.svg"   ,"josh.png","purple_tree.svg"  ,"bear.svg"];
+let imgshort = ["whale"    ,"koala tree"    ,"aple"    ,"hippopotamus","josh"    ,"purple koala tree","bear"    ];
+let imgload  = [false      ,false           ,false     ,false         ,false     ,false              ,false     ];
+let imgs     = [false      ,false           ,false     ,false         ,false     ,false              ,false     ];
+let dWidths  = [128        ,192             ,64        ,128           ,64        ,192                ,512       ];
 
-let inst = [[-1,-1],[0,-1,0],[0,17,-14],[0,18,8],[0,19,"whale"],[0,10,90],[0,1],[0,7,"Something long enough to line break."],[-1,0,10]]; // instructions
+let inst = []; // instructions
 let cur = 0; // cursor position
 let timeLast = 0; // time of last frame
 let timeNext = 0; // time to execute next instruction
-let scod = '';//'create(jeff);\njeff.image(whale)\njeff.label(-14,8,"whale",24);jeff.show();wait(1)\njeff.bub("Hello, I am Whale #292471208677, also known as Jeff.");\nwait(5);jeff.bub();wait(1);\njeff.bub("I will turn around");wait(0.61);jeff.flip(x)\nwait(1)\njeff.bub("Actually, I\'m over here now.")\njeff.x(-100.001)\nwait(2);jeff.rotate(180);wait(0.71828182845904);\njeff.bub(".");wait(0.5);jeff.bub("..");wait(0.5);jeff.bub("...");wait(1);\njeff.bub("I AM NOT A PON!")\nwait(0.8);\njeff.bub();\nnew(apon);apon.image(aple);apon.label(0,0,16,"PON");apon.bub("But I am!");apon.show();\ndelay(1.414213562373095);\napon.bub("Oh no! [reason]! I gotta hide!")\nwait(1);apon.glide(0,0,-100,0,1.618033988749895)\nwait(1);apon.bub()\nwait(1);apon.layer(-100);wait(1)\njeff.smoothRotate(180,360,0,1,0,0,10,-15,6)\nwait(1);jeff.unflip();jeff.bub("I don\'t see him anywhere...");wait(2);jeff.bub();\napon.glide(-100,0,156,-64,1.2);apon.flip(x)\napon.stretch(1,1,5,2,0.6);wait(0.6);apon.bub("I was behind you the entire time!");\napon.squish(5,2,1,1,0.6)\ndelay(0.6)\napon.bub("Because I\'m actually...");\nwait(2);apon.image(koala tree)\napon.label(24)\napon.bub("A koala PON!");wait(1)\njeff.bub("YORE KNOT A PONE")\nwait(0.2);apon.vis();\nwait(1.111);jeff.bub("the end");wait(0.5);jeff.bub();'; // string code
+let scod = ''; // source code
 let vars = []; // variables
 let chas = []; // characters
 //let zps  = []; // used for layering
@@ -89,11 +88,11 @@ let chas = []; // characters
 let timer = 0; // global timer
 let startTime = 0;
 let play = false;
-let sms = ["Please insert some code\nor upload a project.","There was a problem\nimporting the file.","There was a problem\ncompiling the code.","Import successful!\nPress play to begin.","Compilation successful!\nPress play to begin.","Project stopped."];
+let sms = ["Please insert some code\nor upload a project.","There was a problem\nimporting the file.","There was a problem\ncompiling the code.\nCheck your console for\nmore information.","Import successful!\nPress play to begin.","Compilation successful!\nPress play to begin.","Project stopped."];
 let stopMessage = sms[0];
 let fps = 60;
 let notosans;
-let xo = 320;let yo = 180;let xDir = 1;let yDir = -1;let aMode = 1; // set coordinate system
+let xo = 320;let yo = 180;let xDir = 1;let yDir = -1;let aMode = 1;let pMode = 0;// set coordinate system
 let bExport;let bImport;let bCompile;let bPlay;let bStop;
 function preload() {
   notosans = loadFont("NotoSans-Medium.ttf");
@@ -138,8 +137,9 @@ function draw() {
     if (cur<inst.length){
     curin = inst[cur];
     if (curin[0] < 0) { // global instruction
-      if (curin[1] == -1) {chas.push(new Hfchar("steve"));} // new character
+      if (curin[1] == -1) {chas.push(new Hfchar());} // new character
       if (curin[1] == 0) {timeNext = timer+curin[2];}
+      if (curin[1] == 10) {pMode=curin[2];}
       if (curin[1] == 11) {
         if(curin[2]==0){aMode=1;}
         if(curin[2]==1){aMode=360;}
@@ -316,8 +316,7 @@ function interpretCode() {
   let p = 0; // in parentheses?
   for (let i = 0; i < scod.length; i++) {
     if (p === 0) {
-      if (scod.charAt(i) === ";" || scod.charAt(i) === "\n" || i == scod.length-1) {
-        if (scod.charAt(i) !== ';' && scod.charAt(i) !== '\n') {b += scod.charAt(i);}
+      if (scod.charAt(i) === ";" || scod.charAt(i) === "\n") {
         if (b != "") {I.push(b);}
         b = "";
       } else {
@@ -332,6 +331,7 @@ function interpretCode() {
       b += scod.charAt(i);
       if (scod.charAt(i) == '"') {p = 1;}
     }
+    if (i == scod.length-1 && b != "") {I.push(b);}
   }
   let nams = []; // list of namespaces
   let nam = ""; // current namespace
@@ -341,12 +341,22 @@ function interpretCode() {
     let ï = [];
     let N = I[i].split("(")[0];
     if (N.split(".").length == 2) {nam = N.split(".")[0];N = N.split(".")[1];} else {if (rnm) {nam = "";}}
-    let o = I[i].substring(I[i].indexOf("(")+1,I[i].length-1);
-    //o=o.substring(0,o.length-1);
+     let o = I[i].substring(I[i].indexOf("(")+1,I[i].length-1);
     if (nam === "") {
       ï.push(-1);
-      if (N==="newCharacter"||N==="new"||N==="char"||N==="newChar"||N==="newchar"||N==="create"){ï.push(-1);if (o.charAt(0)==='"'&&o.charAt(o.length-1)==='"'){o=o.substring(1,o.length-1);}nams.push(o);}
+      if (N==="newCharacter"||N==="new"||N==="char"||N==="newChar"||N==="newchar"||N==="create"){
+        ï.push(-1);if (o.charAt(0)==='"'&&o.charAt(o.length-1)==='"'){o=o.substring(1,o.length-1);}
+        for(let í=0;í<o.length;í++){if(o.charAt(í)==='"'||o.charAt(í)==='('||o.charAt(í)===')'){stopMessage = sms[2];console.log("Error on \""+I[i]+"\": illegal character name");return;}}
+        for(let í=0;í<nams.length;í++){if(nams[í]===o){stopMessage = sms[2];console.log("Error on \""+I[i]+"\": duplicate character name");return;}}
+        nams.push(o);
+      }
       if (N === "wait" || N === "delay") {ï.push(0);ï.push(float(o));if (isNaN(float(o))){console.log(g);stopMessage = sms[2];return;}}
+      if (N === "polyMode") {ï.push(10);o=o.toUpperCase();
+        if(o==="DIRECT"){ï.push(0);}
+        if(o==="NORM"){ï.push(1);}
+        if(o==="CLAMP"){ï.push(2);}
+        if(o==="BOUNDS"){ï.push(3);}
+      }
       if (N === "angleMode" || N === "angle") {ï.push(11);o=o.toUpperCase();
         if (o==="DEG"||o==="DEGREE"||o==="DEGREES"){ï.push(0);}
         else if (o==="REV"||o==="REVOLUTION"||o==="REVOLUTIONS"||o==="CYCLE"||o==="CYCLES"||o==="TURN"||o==="TURNS"){ï.push(1);}
@@ -443,7 +453,7 @@ function interpretCode() {
   inst = O;stopMessage = sms[4];
 }
 
-function startPlay() {if(inst.length==0){stopMessage = sms[0];return;}cur = 0;vars = [];chas = [];let aMode = 1;timeLast = 0;timeNext = 0;startTime=millis()/1000.0;play = true;}
+function startPlay() {if(inst.length==0){stopMessage = sms[0];return;}cur = 0;vars = [];chas = [];aMode = 1;pMode=0;timeLast = 0;timeNext = 0;startTime=millis()/1000.0;play = true;}
 function stopPlay() {play = false;stopMessage = sms[5];}
 function compileCode() {
   play = false;
@@ -490,4 +500,4 @@ function wrapText(text,wide) {
   return tl;
 }
 
-function evalPoly(t,p) {if (p.length > 0) {let T = 1;let total = 0;for (let I = 0; I < p.length; I++) {T *= t;total += T*p[I];}return total;} else {return t;}}
+function evalPoly(t,p,pm) {if (p.length > 0) {let T = 1;let total = 0;for (let I = 0; I < p.length; I++) {T *= t;total += T*p[I];}if(pm===3){return constrain(total/evalPoly(1,p,0),0,1);}else if(pm===2){return constrain(total,0,1);}else if(pm===1){return total/evalPoly(1,p,0);}else{return total;}} else {return t;}}
